@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yh9-ML-jkJ">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="8ug-U3-LAt">
+            <objects>
+                <navigationController id="MSM-VN-2fG" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hck-MA-7OA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="s6m-Mq-3eN" kind="relationship" relationship="rootViewController" id="Arn-ce-Cwn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zew-1w-riH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="218" y="959"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="Id4-V0-wTC">
+            <objects>
+                <viewController id="s6m-Mq-3eN" customClass="DetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lkC-d4-G1l"/>
+                        <viewControllerLayoutGuide type="bottom" id="6gd-dV-Mie"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zb1-sf-b6J">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jwZ-OO-8aA">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="548"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="s6m-Mq-3eN" id="ezY-sZ-4m1"/>
+                                </connections>
+                            </webView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gb6-ca-evI">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="GDM-aL-ev3"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Next Page" id="9hL-xp-c1v">
+                                        <connections>
+                                            <action selector="nextButtonTapped:" destination="s6m-Mq-3eN" id="sZn-FS-Bi7"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="UDd-wV-XA7"/>
+                                    <barButtonItem tag="1" image="icn-favorite" id="LfJ-Vp-HW4">
+                                        <connections>
+                                            <action selector="favoriteButtonTapped:" destination="s6m-Mq-3eN" id="bNN-BW-h5c"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="30" style="plain" systemItem="fixedSpace" id="Uxe-tm-I30"/>
+                                    <barButtonItem systemItem="action" id="KSO-Vz-9bg">
+                                        <connections>
+                                            <action selector="shareButtonTapped:" destination="s6m-Mq-3eN" id="6rE-hX-8xA"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="30" style="plain" systemItem="fixedSpace" id="y1s-I1-W1g"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6gd-dV-Mie" firstAttribute="top" secondItem="Gb6-ca-evI" secondAttribute="bottom" id="1bB-0k-wFf"/>
+                            <constraint firstAttribute="trailing" secondItem="Gb6-ca-evI" secondAttribute="trailing" id="6iP-S8-yoQ"/>
+                            <constraint firstItem="6gd-dV-Mie" firstAttribute="top" secondItem="jwZ-OO-8aA" secondAttribute="bottom" constant="52" id="Sy4-l2-Kla"/>
+                            <constraint firstItem="Gb6-ca-evI" firstAttribute="leading" secondItem="zb1-sf-b6J" secondAttribute="leading" id="Wd2-Z7-kFZ"/>
+                            <constraint firstItem="jwZ-OO-8aA" firstAttribute="leading" secondItem="zb1-sf-b6J" secondAttribute="leading" id="a8W-vV-Man"/>
+                            <constraint firstItem="Gb6-ca-evI" firstAttribute="top" secondItem="jwZ-OO-8aA" secondAttribute="bottom" constant="8" id="aEg-jM-Vx4"/>
+                            <constraint firstAttribute="trailing" secondItem="jwZ-OO-8aA" secondAttribute="trailing" id="bm4-bJ-hd1"/>
+                            <constraint firstItem="jwZ-OO-8aA" firstAttribute="top" secondItem="lkC-d4-G1l" secondAttribute="bottom" constant="-20" id="rVt-Pe-9rA"/>
+                            <constraint firstItem="jwZ-OO-8aA" firstAttribute="top" secondItem="zb1-sf-b6J" secondAttribute="top" id="zPM-5R-MBK"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="rVt-Pe-9rA"/>
+                                <exclude reference="Sy4-l2-Kla"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="lnU-Lm-i6r"/>
+                    <connections>
+                        <outlet property="iboFavoriteItem" destination="LfJ-Vp-HW4" id="RM6-Of-8vu"/>
+                        <outlet property="iboShareItem" destination="KSO-Vz-9bg" id="gs3-zm-VXi"/>
+                        <outlet property="iboWebView" destination="jwZ-OO-8aA" id="V03-9g-gJf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sUn-9x-adt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1214" y="826"/>
+        </scene>
+        <!--Favorite Pages-->
+        <scene sceneID="Phi-aa-v8w">
+            <objects>
+                <tableViewController title="Favorite Pages" clearsSelectionOnViewWillAppear="NO" id="s2Z-gT-EY2" customClass="MasterViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="KdA-uT-XmL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavouriteCell" textLabel="7Mw-gf-aYk" detailTextLabel="o9k-vK-4k0" style="IBUITableViewCellStyleSubtitle" id="qtG-Ci-gRA">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qtG-Ci-gRA" id="xAy-Ac-HsJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Web page address" textAlignment="natural" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Mw-gf-aYk">
+                                            <rect key="frame" x="15" y="5" width="136" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Date/Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="o9k-vK-4k0">
+                                            <rect key="frame" x="15" y="25" width="55" height="14"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="MSM-VN-2fG" kind="showDetail" identifier="SelectPageSegue" id="iQC-vC-UPe"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="s2Z-gT-EY2" id="l4U-ng-ZLC"/>
+                            <outlet property="delegate" destination="s2Z-gT-EY2" id="eJI-3V-aid"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Favorite Pages" id="S4P-mA-UP1">
+                        <barButtonItem key="backBarButtonItem" title="Favorite" id="yiD-2e-fpD"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7M2-51-XwJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1868" y="20"/>
+        </scene>
+        <!--Favorite Pages-->
+        <scene sceneID="gzm-Yi-bi1">
+            <objects>
+                <navigationController title="Favorite Pages" id="Upc-ua-Z5N" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zl9-8H-726">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="s2Z-gT-EY2" kind="relationship" relationship="rootViewController" id="g3f-ZA-N4A"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="weo-gs-q6z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="962" y="-50"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="dg1-xk-0Nm">
+            <objects>
+                <splitViewController id="yh9-ML-jkJ" customClass="SplitViewController" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="Upc-ua-Z5N" kind="relationship" relationship="masterViewController" id="qnp-lm-U07"/>
+                        <segue destination="MSM-VN-2fG" kind="relationship" relationship="detailViewController" id="P3n-NO-lEL"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="85t-cT-U9V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="128" y="108"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icn-favorite" width="40" height="40"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="iQC-vC-UPe"/>
+    </inferredMetricsTieBreakers>
+</document>
