@@ -27,6 +27,7 @@
     self.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
     self.navigationItem.leftItemsSupplementBackButton = YES;
     
+    //Show last loaded URL or last saved favorite
     NSMutableURLRequest *wikiRequest = [NSMutableURLRequest requestWithURL:[[WikiPageManager sharedInstance] lastLoadedURL]];
     [self.iboWebView loadRequest:wikiRequest];
 }
@@ -50,7 +51,7 @@
 
 - (void)p_reloadPageWithIsFavorite:(BOOL)isFavorite {
     if (isFavorite) {
-         [self.iboFavoriteItem setImage:[UIImage imageNamed:@"icn-favorite-a"]];
+        [self.iboFavoriteItem setImage:[UIImage imageNamed:@"icn-favorite-a"]];
     } else {
         [self.iboFavoriteItem setImage:[UIImage imageNamed:@"icn-favorite"]];
     }
@@ -83,17 +84,16 @@
 }
 
 - (IBAction)shareButtonTapped:(id)sender {
-    NSArray *activityItems = @[@"Wikipedia Page", self.iboWebView.request.URL.absoluteString];
-    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-    activityVC.excludedActivityTypes =  @[UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePostToWeibo, UIActivityTypePrint, UIActivityTypeMessage];
-    
-    if ([activityVC respondsToSelector:@selector(popoverPresentationController)]) {
-        activityVC.popoverPresentationController.barButtonItem = self.iboShareItem;
-//        activityVC.popoverPresentationController.delegate = self;
-    }
-    [self presentViewController:activityVC animated:YES completion:^{
+    if (self.iboWebView.request.URL.absoluteString.length) {
+        NSArray *activityItems = @[@"Wikipedia Page", self.iboWebView.request.URL.absoluteString];
+        UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+        activityVC.excludedActivityTypes =  @[UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePostToWeibo, UIActivityTypePrint, UIActivityTypeMessage, UIActivityTypeMail];
         
-    }];
+        if ([activityVC respondsToSelector:@selector(popoverPresentationController)]) {
+            activityVC.popoverPresentationController.barButtonItem = self.iboShareItem;
+        }
+        [self presentViewController:activityVC animated:YES completion:nil];
+    }
 }
 
 #pragma mark - MasterViewControllerDelegate methods
@@ -110,16 +110,21 @@
 #pragma mark - UIWebViewDelegate
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
+    self.iboFavoriteItem.enabled = NO;
+    self.iboShareItem.enabled = NO;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     // Save last loaded URL
     [[WikiPageManager sharedInstance] setLastLoadedURL:self.iboWebView.request.URL];
-     WebPage *foundPage = [[WikiPageManager sharedInstance] findFavoritePageWithURL:self.iboWebView.request.URL];
+    WebPage *foundPage = [[WikiPageManager sharedInstance] findFavoritePageWithURL:self.iboWebView.request.URL];
     [self p_reloadPageWithIsFavorite:(foundPage) ? YES : NO];
     
     self.title = self.iboWebView.request.URL.absoluteString;
+    
+    self.iboFavoriteItem.enabled = YES;
+    self.iboShareItem.enabled = YES;
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
@@ -135,20 +140,5 @@
         [self.iboWebView loadHTMLString:errorString baseURL:nil];
     }
 }
-
-#pragma mark - UIPopoverPresentationControllerDelegate
-
-//- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller traitCollection:(UITraitCollection *)traitCollection {
-//    if (!traitCollection.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-//        return UIModalPresentationFullScreen;
-//    }
-//    
-//    if (self.splitViewController.view.bounds.size.width > 320) {
-//        return UIModalPresentationNone;
-//    } else {
-//        return UIModalPresentationFullScreen;
-//    }
-//}
-
 
 @end

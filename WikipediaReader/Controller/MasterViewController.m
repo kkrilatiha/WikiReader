@@ -15,7 +15,7 @@
 #import "SplitViewController.h"
 #import "WikiPageManager.h"
 
-@interface MasterViewController () <NSFetchedResultsControllerDelegate, UISplitViewControllerDelegate>
+@interface MasterViewController () <NSFetchedResultsControllerDelegate>
 @property (strong, nonatomic) NSFetchedResultsController *pFetchedResultsController;
 @end
 
@@ -30,14 +30,8 @@ static NSString *SelectPageSegueId = @"SelectPageSegue";
     
     self.clearsSelectionOnViewWillAppear = NO;
     self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
-    self.splitViewController.delegate = self;
     
-        self.delegate = ((SplitViewController *)self.splitViewController).detailVC;
-//    SplitViewController *spilitVC = (SplitViewController *)self.splitViewController;
-//    
-//    UINavigationController *detailNavVC = spilitVC.viewControllers.lastObject;
-//    DetailViewController *detailVC = (DetailViewController *)detailNavVC.topViewController;
-//    self.delegate = detailVC;
+    self.delegate = ((SplitViewController *)self.splitViewController).detailVC;
     
     // Fetch all favorite pages, sorted ASC
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([WebPage class])];

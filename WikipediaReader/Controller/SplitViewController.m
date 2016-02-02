@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     UINavigationController *masterNav = [self.viewControllers firstObject];
     self.pMasterVC = [masterNav.viewControllers firstObject];
     UINavigationController *detailNav = [self.viewControllers lastObject];
